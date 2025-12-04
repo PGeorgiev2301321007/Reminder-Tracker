@@ -8,7 +8,8 @@ import androidx.compose.runtime.*
 import com.example.remindertracker.data.db.AppDatabase
 import com.example.remindertracker.data.repository.ReminderRepository
 import com.example.remindertracker.presenter.AddReminderPresenter
-import com.example.remindertracker.ui.edit.AddReminderScreen
+import com.example.remindertracker.presenter.ReminderListPresenter
+import com.example.remindertracker.ui.add.AddReminderScreen
 import com.example.remindertracker.ui.list.ReminderListScreen
 import com.example.remindertracker.ui.theme.ReminderTrackerTheme
 
@@ -24,6 +25,7 @@ class MainActivity : ComponentActivity() {
                 // Database + repository
                 val db = AppDatabase.getInstance(this)
                 val repository = ReminderRepository(db.reminderDao())
+                val listPresenter = ReminderListPresenter(repository)
 
                 // Local UI state → това замества ViewModel.isCreating
                 var showAddScreen by remember { mutableStateOf(false) }
@@ -45,12 +47,9 @@ class MainActivity : ComponentActivity() {
 
                 } else {
 
-                    // Екранът със списъка
                     ReminderListScreen(
                         repository = repository,
-                        onAddClicked = {
-                            showAddScreen = true
-                        }
+                        onAddClicked = { showAddScreen = true }
                     )
                 }
             }

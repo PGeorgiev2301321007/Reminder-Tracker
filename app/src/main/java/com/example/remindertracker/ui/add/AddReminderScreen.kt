@@ -1,4 +1,4 @@
-package com.example.remindertracker.ui.edit
+package com.example.remindertracker.ui.add
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
